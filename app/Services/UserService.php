@@ -35,7 +35,7 @@ class UserService extends BaseService
 
         $db->transComplete();
         if (!$db->transStatus()) {
-            throw new Exception('Insertion failed', 500);
+            throw new Exception('Insertion failed.', 500);
         }
 
         $query = $userModel->find($userModel->getInsertID());
@@ -71,7 +71,7 @@ class UserService extends BaseService
 
         $db->transComplete();
         if (!$db->transStatus()) {
-            throw new Exception('Update failed', 500);
+            throw new Exception('Update failed.', 500);
         }
 
         $query = $userModel->find($id);
@@ -103,7 +103,7 @@ class UserService extends BaseService
 
         $db->transComplete();
         if (!$db->transStatus()) {
-            throw new Exception('Deletion failed', 500);
+            throw new Exception('Deletion failed.', 500);
         }
     }
 
@@ -122,7 +122,7 @@ class UserService extends BaseService
             empty((string) $data['username'])
             || !preg_match("/^[A-Za-z]+$/", $data['username'])
         ) {
-            throw new Exception('Invalid username', 400);
+            throw new Exception('Invalid username.', 400);
         }
         $return['username'] = (string) $data['username'];
 
@@ -130,7 +130,7 @@ class UserService extends BaseService
             empty((string) $data['email'])
             || !filter_var($data['email'], FILTER_VALIDATE_EMAIL)
         ) {
-            throw new Exception('Invalid email', 400);
+            throw new Exception('Invalid email.', 400);
         }
         $return['email'] = (string) $data['email'];
 
@@ -138,7 +138,7 @@ class UserService extends BaseService
             empty((string) $data['name'])
             || !preg_match("/^[a-zA-Z-' ]*$/", $data['name'])
         ) {
-            throw new Exception('Invalid name', 400);
+            throw new Exception('Invalid name.', 400);
         }
         $return['name'] = (string) $data['name'];
 
@@ -150,7 +150,7 @@ class UserService extends BaseService
                 ['options' => ['min_range' => 0, 'max_range' => 200]]
             )
         ) {
-            throw new Exception('Invalid age', 400);
+            throw new Exception('Invalid age.', 400);
         }
         $return['age'] = (int) $data['age'];
 
@@ -176,7 +176,7 @@ class UserService extends BaseService
             || strlen($data['password']) < 8
             || strlen($data['password']) > 30
         ) {
-            throw new Exception('Invalid password', 400);
+            throw new Exception('Invalid password.', 400);
         }
         $passwordHash = password_hash($data['password'], PASSWORD_DEFAULT);
         $return['password'] = $passwordHash;
