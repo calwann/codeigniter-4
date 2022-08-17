@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\UserModel;
+use App\Services\AuthService;
 use App\Services\ExceptionService;
 use App\Services\UserService;
 use CodeIgniter\HTTP\Response;
@@ -15,6 +16,19 @@ class UserController extends BaseController
     public function __construct(
         private Model $userModel = new UserModel()
     ) {
+    }
+
+    /**
+     * Log out and redirect to website
+     *
+     * @return
+     */
+    public function mySelf()
+    {
+        return view('users/myself', [
+            'title' => 'Myself',
+            'myself' => AuthService::getUser(),
+        ]);
     }
 
     /**
@@ -72,7 +86,7 @@ class UserController extends BaseController
                 $return = UserService::insertUser($this->request->getPost());
             }
         } catch (Throwable $e) {
-            return ExceptionService::reponseJson($e);
+            return ExceptionService::responseJson($e);
         }
 
         $statusCode = 200;
@@ -96,7 +110,7 @@ class UserController extends BaseController
         try {
             UserService::deleteUser($id);
         } catch (Throwable $e) {
-            return ExceptionService::reponseJson($e);
+            return ExceptionService::responseJson($e);
         }
 
         $statusCode = 200;

@@ -3,11 +3,24 @@
 namespace App\Services;
 
 use CodeIgniter\Config\BaseService;
+use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\Response;
 use Throwable;
 
 class ExceptionService extends BaseService
 {
+    /**
+     * Generate log
+     *
+     * @param Throwable $e
+     * @return void
+     */
+    private static function _generateLog(Throwable $e): void
+    {
+        $message = "{$e->getMessage()}.\n{$e->getTraceAsString()}";
+        log_message('error', $message);
+    }
+
     /**
      * Return response json
      *
@@ -15,9 +28,9 @@ class ExceptionService extends BaseService
      * @param array $data
      * @return Response
      */
-    public static function reponseJson(Throwable $e, array $data = []): Response
+    public static function responseJson(Throwable $e, array $data = []): Response
     {
-        log_message('error', 'Exception error', ['exception' => $e]);
+        self::_generateLog($e);
 
         if (empty($data)) {
             $data = [
@@ -32,5 +45,33 @@ class ExceptionService extends BaseService
 
         $response = service('response');
         return $response->setJSON($data)->setStatusCode($statusCode);
+    }
+
+    /**
+     * Return response redirect
+     *
+     * @param Throwable $e
+     * @param array $data
+     * @param string $uri
+     * @return RedirectResponse
+     */
+    public static function responseRedirect(
+        Throwable $e,
+        array $data = [],
+        string $uri = ''
+    ): RedirectResponse {
+        self::_generateLog($e);
+
+        $uri = $uri ?: '/';
+
+        $redirect = redirect()->to($uri);
+
+        if (!empty($data)) {
+            foreach ($data as $key => $value) {
+                $redirect->with($key, $value);
+            }
+        }
+
+        return $redirect;
     }
 }

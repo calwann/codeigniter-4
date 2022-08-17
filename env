@@ -142,3 +142,4 @@
 # auth0.domain = 'domain.auth0.com'
 # auth0.clientId = 'clientId'
 # auth0.clientSecret = 'clientSecret'
+# auth0.cookieSecret = ''

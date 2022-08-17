@@ -1,8 +1,12 @@
 <?= $this->extend('layout') ?>
 
 <?= $this->section('content') ?>
+
 <div class="container mt-5">
-    <?= anchor('/users/create', 'Create new user', ['class' => 'btn btn-success mb-3']) ?>
+    <?= anchor('/users/create', 'Create new user', ['class' => 'btn btn-outline-primary mb-3']) ?>
+    <?= anchor('/users/myself', 'Myself', ['class' => 'btn btn-outline-primary mb-3']) ?>
+    <?= anchor('/login', 'Login', ['class' => 'btn btn-outline-success mb-3']) ?>
+    <?= anchor('/logout', 'Logout', ['class' => 'btn btn-outline-danger mb-3']) ?>
     <table id="userTable" class="table">
         <tr>
             <th>ID</th>

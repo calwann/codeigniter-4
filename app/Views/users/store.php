@@ -2,6 +2,7 @@
 
 <?= $this->section('content') ?>
 <div class="container mt-5">
+    <?= anchor('/', 'Home page', ['class' => 'btn btn-outline-primary mb-3 col-lg-2']) ?>
     <h3><?= !empty($user) ? 'Edit user' : 'Create user' ?></h3>
     <?php $url = !empty($user['id']) ? "users/store/{$user['id']}" : "users/store" ?>
     <?= form_open($url, ['id' => 'userForm']) ?>
@@ -30,9 +31,8 @@
             <input required type="password" name="confirmPassword" id="confirmPassword" class="form-control" onkeyup="validatePassword()">
             <span id="confirmPasswordSpan"></span>
         </div>
-        <input type="submit" class="btn btn-primary" onclick="confirmUserStore(this, 'userForm')">
+        <input type="submit" class="btn btn-success" onclick="confirmUserStore(this, 'userForm')">
     <?= form_close() ?>     
-    <p><?= anchor('/', 'Home page', ['class' => 'btn btn-primary']) ?></p>
 </div>
 
 <?= $this->endSection() ?>

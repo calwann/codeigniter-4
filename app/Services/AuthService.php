@@ -28,6 +28,7 @@ class AuthService extends BaseService
             'domain' => env('auth0.domain'),
             'clientId' => env('auth0.clientId'),
             'clientSecret' => env('auth0.clientSecret'),
+            //'cookieSecret' => env('auth0.cookieSecret'),
         ]);
     }
 
@@ -71,7 +72,8 @@ class AuthService extends BaseService
 
         if (!$callback) {
             $baseUrl = env('app.baseURL');
-            $callback = "{$baseUrl}/login/callback";
+            $callback = "{$baseUrl}login/callback";
+            //$callback = "/login/callback";
         }
 
         $auth->clear();
@@ -96,7 +98,7 @@ class AuthService extends BaseService
             throw new Exception("Logging in authentication failed", 500);
         }
 
-        return $redirect ?? env('app.baseURL');
+        return $redirect ?: env('app.baseURL');
     }
 
     /**

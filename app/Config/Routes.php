@@ -39,9 +39,14 @@ $routes->get('/', 'UserController::list');
 $routes->get('/users', 'UserController::list');
 $routes->get('/users/create', 'UserController::create');
 $routes->get('/users/edit/(:num)', 'UserController::edit/$1');
+$routes->get('/users/myself', 'UserController::myself');
 $routes->post('/users/store', 'UserController::store');
 $routes->post('/users/store/(:num)', 'UserController::store/$1');
 $routes->post('/users/delete/(:num)', 'UserController::delete/$1');
+
+$routes->get('/login', 'AuthController::login');
+$routes->get('/login/callback', 'AuthController::loginCallback');
+$routes->get('/logout', 'AuthController::logout');
 
 /*
  * --------------------------------------------------------------------
