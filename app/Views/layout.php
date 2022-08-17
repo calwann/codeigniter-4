@@ -12,9 +12,8 @@
 <body>
     <?= $this->renderSection('content') ?>
 
-    <?php $flashDatas = session()->getFlashdata() ?>
-    <?php if (!empty($flashDatas)) : ?>
-        <?php foreach ($flashDatas as $msg) : ?>
+    <?php if (!empty(session()->getFlashdata())) : ?>
+        <?php foreach (session()->getFlashdata() as $msg) : ?>
             <?= view('components/messages', ['msg' => $msg]) ?>
         <?php endforeach ?>
     <?php endif ?>

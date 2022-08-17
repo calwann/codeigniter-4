@@ -28,7 +28,7 @@ class AuthService extends BaseService
             'domain' => env('auth0.domain'),
             'clientId' => env('auth0.clientId'),
             'clientSecret' => env('auth0.clientSecret'),
-            //'cookieSecret' => env('auth0.cookieSecret'),
+            'cookieSecret' => env('auth0.cookieSecret'),
         ]);
     }
 
