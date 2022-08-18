@@ -73,7 +73,6 @@ class AuthService extends BaseService
         if (!$callback) {
             $baseUrl = env('app.baseURL');
             $callback = "{$baseUrl}login/callback";
-            //$callback = "/login/callback";
         }
 
         $auth->clear();

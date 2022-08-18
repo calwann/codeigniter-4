@@ -20,9 +20,7 @@ class AuthController extends BaseController
         try {
             $url = AuthService::login();
         } catch (Throwable $e) {
-            return ExceptionService::responseRedirect($e, [
-                'msg' => 'Login failed'
-            ]);
+            return ExceptionService::responseRedirect($e, ['Login failed']);
         }
 
         return redirect()->to($url);
@@ -41,9 +39,7 @@ class AuthController extends BaseController
         try {
             $url = AuthService::callback($callback);
         } catch (Throwable $e) {
-            return ExceptionService::responseRedirect($e, [
-                'msg' => 'Login failed'
-            ]);
+            return ExceptionService::responseRedirect($e, ['Login failed']);
         }
 
         return redirect()->to($url);
@@ -59,9 +55,7 @@ class AuthController extends BaseController
         try {
             $url = AuthService::logout();
         } catch (Throwable $e) {
-            return ExceptionService::responseRedirect($e, [
-                'msg' => 'Logout failed'
-            ]);
+            return ExceptionService::responseRedirect($e, ['Logout failed']);
         }
 
         return redirect()->to($url);

@@ -15,10 +15,10 @@ class ExceptionService extends BaseService
      * @param Throwable $e
      * @return void
      */
-    private static function _generateLog(Throwable $e): void
+    public static function generateLog(Throwable $e, string $level = 'error'): void
     {
         $message = "{$e->getMessage()}.\n{$e->getTraceAsString()}";
-        log_message('error', $message);
+        log_message($level, $message);
     }
 
     /**
@@ -30,7 +30,7 @@ class ExceptionService extends BaseService
      */
     public static function responseJson(Throwable $e, array $data = []): Response
     {
-        self::_generateLog($e);
+        self::generateLog($e);
 
         if (empty($data)) {
             $data = [
@@ -60,7 +60,7 @@ class ExceptionService extends BaseService
         array $data = [],
         string $uri = ''
     ): RedirectResponse {
-        self::_generateLog($e);
+        self::generateLog($e);
 
         $uri = $uri ?: '/';
 
